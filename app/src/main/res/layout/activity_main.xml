@@ -36,7 +36,6 @@
         android:layout_below="@id/matrikelnummer"
         android:textSize="25dp"
         android:gravity="center"
-
         android:layout_margin="20dp"
         />
 
@@ -44,10 +43,21 @@
         android:id="@+id/abschicken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/servertext"
+        android:layout_below="@id/sorted"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:text="Abschicken"
+        />
+
+    <TextView
+        android:id="@+id/sorted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/servertext"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="Hier stehen die Ziffern der größe nach sortiert."
+        android:layout_margin="10dp"
         />
 
 

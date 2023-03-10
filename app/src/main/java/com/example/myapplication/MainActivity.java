@@ -14,6 +14,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         EditText matrikelnummer = (EditText) findViewById(R.id.matrikelnummer);
         Button abschicken = (Button) findViewById(R.id.abschicken);
         TextView servertext = (TextView) findViewById(R.id.servertext);
+        TextView sorted = (TextView) findViewById(R.id.sorted);
 
         abschicken.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 t.start();
+                sorted.setText(sortMatNr(matrikelnr));
 
 
                 try {
@@ -66,6 +71,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String sortMatNr(String matnr){
+        char[] c = matnr.toCharArray();
+        Arrays.sort(c);
+        return sortout(c);
+    }
+
+    private String sortout(char[] c){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < c.length; i++){
+            if(!isPrime(c[i])){
+                sb.append(c[i]);
+            }
+        }
+        return sb.toString();
+    }
+
+    private boolean isPrime(char c){
+        int z = Character.getNumericValue(c);
+        if(z < 2){return false;}
+        for(int i = 2; i < z; i++){
+            if(z % i == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
 
