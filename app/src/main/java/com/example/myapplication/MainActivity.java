@@ -68,15 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String getServerAnswer(String matrikelnummer) {
-
-
-
-        return "";
-
-
-    }
-
 
 
 
