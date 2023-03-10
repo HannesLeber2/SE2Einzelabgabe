@@ -60,5 +60,15 @@
         android:layout_margin="10dp"
         />
 
+    <Button
+        android:id="@+id/sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sortieren"
+        android:layout_below="@id/abschicken"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/teal_700"
+        />
+
 
 </RelativeLayout>

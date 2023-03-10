@@ -14,7 +14,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -29,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
         Button abschicken = (Button) findViewById(R.id.abschicken);
         TextView servertext = (TextView) findViewById(R.id.servertext);
         TextView sorted = (TextView) findViewById(R.id.sorted);
+        Button sortieren = (Button) findViewById(R.id.sort);
+
+        sortieren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String matnr = matrikelnummer.getText().toString();
+                sorted.setText(sortMatNr(matnr));
+            }
+        });
 
         abschicken.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 //has to be final, so that the Thread can access it
                 final String[] s = new String[1];
                 Thread t = new Thread(new Runnable() {
-
                     @Override
                     public void run() {
                         try {
@@ -58,15 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 t.start();
-                sorted.setText(sortMatNr(matrikelnr));
-
-
                 try {
                     t.join(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 servertext.setText(s[0]);
             }
         });
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String sortMatNr(String matnr){
+        Log.d("", "Sortiere Matrikelnummer: "+matnr);
         char[] c = matnr.toCharArray();
         Arrays.sort(c);
         return sortout(c);
@@ -99,11 +103,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
-
-
-
-
 
 }
