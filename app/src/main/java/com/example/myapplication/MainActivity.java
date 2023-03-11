@@ -14,6 +14,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
 
@@ -59,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
                             s[0] = serverAntwort;
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        }catch (IOException e) {
+                            s[0] = "Es konnte keine Verbindung zum Server aufgebaut werden...";
+                            Log.e("", "Verbindungsaufbau fehlgeschlagen");
                         }
                     }
                 });
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     t.join(5000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
                 servertext.setText(s[0]);
             }
