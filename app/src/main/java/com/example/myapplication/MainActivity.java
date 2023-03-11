@@ -73,28 +73,34 @@ public class MainActivity extends AppCompatActivity {
                 servertext.setText(s[0]);
             }
         });
-
     }
 
     private String sortMatNr(String matnr){
-        Log.d("", "Sortiere Matrikelnummer: "+matnr);
-        char[] c = matnr.toCharArray();
-        Arrays.sort(c);
-        return sortout(c);
+        int[] numbers = new int[matnr.length()];
+        int numericValue;
+        for(int i = 0; i < matnr.length(); i++){
+            numericValue = Character.getNumericValue(matnr.charAt(i));
+            if(numericValue > 9 || numericValue < 0){
+                throw new IllegalArgumentException("Matrikelnummer darf nur aus Ziffern bestehen! Ihre Matrikelnummer: '" + matnr + "'");
+            }else{
+                numbers[i] = numericValue;
+            }
+        }
+        Arrays.sort(numbers);
+        return sortoutPrimeNumbers(numbers);
     }
 
-    private String sortout(char[] c){
+    private String sortoutPrimeNumbers(int[] numbers){
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < c.length; i++){
-            if(!isPrime(c[i])){
-                sb.append(c[i]);
+        for(int i = 0; i < numbers.length; i++){
+            if(!isPrime(numbers[i])){
+                sb.append(numbers[i]);
             }
         }
         return sb.toString();
     }
 
-    private boolean isPrime(char c){
-        int z = Character.getNumericValue(c);
+    private boolean isPrime(int z){
         if(z < 2){return false;}
         for(int i = 2; i < z; i++){
             if(z % i == 0){
